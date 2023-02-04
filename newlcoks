@@ -1,0 +1,85 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+int main() {
+    // Open a window to display the video feed
+    cv::namedWindow("Window", cv::WINDOW_NORMAL);
+    cv::resizeWindow("Window", 640, 480);
+
+    // Open the default camera
+    cv::VideoCapture cap(0);
+    if (!cap.isOpened()) {
+        std::cout << "Error opening camera" << std::endl;
+        return -1;
+    }
+
+    // Read each frame from the camera
+    while (true) {
+        cv::Mat frame;
+        cap >> frame;
+
+        // Get the color in the middle of the screen
+        int x = frame.cols / 2;
+        int y = frame.rows / 2;
+        cv::Vec3b color = frame.at<cv::Vec3b>(y, x);
+        int blue = color[0];
+        int green = color[1];
+        int red = color[2];
+
+        // Draw a circle in the center of the screen
+        cv::circle(frame, cv::Point(x, y), 20, cv::Scalar(0, 0, 255), 3);
+
+        // Display the current frame
+        cv::imshow("Window", frame);
+
+        // Break the loop if the user presses 'esc'
+        char key = cv::waitKey(1);
+        if (key == 27) {
+            break;
+        }
+    }
+
+    return 0;
+}#include <opencv2/opencv.hpp>
+#include <iostream>
+
+int main() {
+    // Open a window to display the video feed
+    cv::namedWindow("Window", cv::WINDOW_NORMAL);
+    cv::resizeWindow("Window", 640, 480);
+
+    // Open the default camera
+    cv::VideoCapture cap(0);
+    if (!cap.isOpened()) {
+        std::cout << "Error opening camera" << std::endl;
+        return -1;
+    }
+
+    // Read each frame from the camera
+    while (true) {
+        cv::Mat frame;
+        cap >> frame;
+
+        // Get the color in the middle of the screen
+        int x = frame.cols / 2;
+        int y = frame.rows / 2;
+        cv::Vec3b color = frame.at<cv::Vec3b>(y, x);
+        int blue = color[0];
+        int green = color[1];
+        int red = color[2];
+
+        // Draw a circle in the center of the screen
+        cv::circle(frame, cv::Point(x, y), 20, cv::Scalar(0, 0, 255), 3);
+
+        // Display the current frame
+        cv::imshow("Window", frame);
+
+        // Break the loop if the user presses 'esc'
+        char key = cv::waitKey(1);
+        if (key == 27) {
+            break;
+        }
+    }
+
+    return 0;
+}
